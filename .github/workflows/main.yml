@@ -33,3 +33,4 @@ jobs:
         with:
           name: app-apk
           path: build/sapk/app-release.apk
+          
