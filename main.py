@@ -23,10 +23,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev mesa-utils
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.x'
+          channel: 'stable'
+          cache: true
 
       - name: Install dependencies
         run: |
