@@ -23,6 +23,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev mesa-utils
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
