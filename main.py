@@ -1,23 +1,33 @@
-import flet as ft
+name: Build Flet APK
 
-def main(page: ft.Page):
-    page.title = "App Contenedores"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    
-    # Texto informativo en pantalla
-    texto = ft.Text("App de reporte de contenedores lista", size=20)
-    
-    def boton_clic(e):
-        texto.value = "¡Botón pulsado correctamente!"
-        page.update()
+on:
+  push:
+    branches: [ main ]
 
-    boton = ft.ElevatedButton("Hacer reporte", on_click=boton_clic)
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    page.add(
-        ft.Row(
-            [texto, boton],
-            alignment=ft.MainAxisAlignment.CENTER,
-        )
-    )
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-ft.app(target=main)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flet
+
+      - name: Build APK with Flet
+        run: |
+          flet build apk --yes
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-apk
+          path: build/apk/app-release.apk
