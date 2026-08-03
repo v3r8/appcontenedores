@@ -39,11 +39,13 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Accept Android Licenses
+        run: yes | flutter doctor --android-licenses
+
       - name: Build Flet APK
         env:
           CI: "true"
-        run: |
-          flet build apk --yes --verbose
+        run: flet build apk --yes
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
