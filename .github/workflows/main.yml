@@ -38,17 +38,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install flet
 
-      - name: Pack Flet Project
+      - name: Package Python app for Flutter
         run: |
-          flet pack main.py --project-name appcontenedores
+          flet pack main.py
 
-      - name: Build APK
+      - name: Build APK with Flutter
         run: |
-          cd build/appcontenedores
           flutter build apk --release
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-apk
-          path: build/appcontenedores/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
