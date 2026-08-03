@@ -1,0 +1,11 @@
+[project]
+name = "appcontenedores"
+version = "0.1.0"
+description = "App para registrar contenedores dañados"
+requires-python = ">=3.10"
+dependencies = [
+    "flet>=0.25.0"
+]
+
+[tool.flet]
+app-path = "main.py"
