@@ -40,14 +40,16 @@ jobs:
 
       - name: Package Python app for Flutter
         run: |
-          flet pack main.py
+          flet pack main.py --output build/flutter_app
 
       - name: Build APK with Flutter
         run: |
+          cd build/flutter_app
+          flutter pub get
           flutter build apk --release
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/flutter_app/build/app/outputs/flutter-apk/app-release.apk
